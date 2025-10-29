@@ -1,92 +1,68 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
 import Link from 'next/link';
 import { FiHome } from "react-icons/fi";
 import { MdMailOutline } from "react-icons/md";
-import { IoMenu } from "react-icons/io5";
-import { IoIosCloseCircleOutline } from "react-icons/io";
-
 
 export default function Header() {
+  return (
+    <header>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div className="container">
+          {/* Logo */}
+          <Link className="navbar-brand" href="/">
+            <img 
+              src="/logo.png"
+              alt="logo"
+              width={200}
+              height={60}
+            />
+          </Link>
 
-    const [isOpen, setOpen] = useState(false);
+          {/* Toggler for mobile */}
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
 
-    return (
-        <header className=''>
-            <nav>
-                <div>
-                    <img 
-                    src='/logo.png'
-                    alt='logo'
-                    width={200}
-                    height={60}
-                    />
-                </div>
+           {/* Navbar links */}
+          <div className="collapse navbar-collapse justify-content-end" id="navbarRightContent">
+            <ul className="navbar-nav mb-2 mb-lg-0 d-flex align-items-center gap-3">
+              <li className="nav-item">
+                <Link className="nav-link d-flex align-items-center" href="#">
+                  <FiHome className="me-1" /> Home
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" href="#">Services</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" href="#">About</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" href="#">Contact</Link>
+              </li>
+            </ul>
 
-                {/* Lager screen menu */}
-                <div>
-                    <ul>
-                        <li>
-                            <Link href="#">
-                                <FiHome />Home
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="#">
-                                Services
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="#">
-                                About
-                            </Link>
-                        </li>
-                    </ul>     
-                </div>
-
-                <div>
-                    <div>
-                        <button >
-                            <MdMailOutline />Contact Us
-                        </button>
-                        <button>
-                            Login
-                        </button>
-                    </div>
-                    {/* Smaller screeen navbar show/hide buttons. These buttons should hide in larger screens */}
-                    <div>
-                        {isOpen ? (
-                            <button onClick={() => setOpen(false)} ><IoIosCloseCircleOutline/></button>
-                        ) : (
-                            <button onClick={() => setOpen(true)} ><IoMenu /></button>                  
-                        )}
-                    </div>
-                </div>
-
-                {/* Mobile screen menu */}
-                <div >
-                    <ul>
-                        <li >
-                            <Link href="#">
-                                Home
-                            </Link>
-                        </li>
-                        <li >
-                            <Link href="#">
-                                Services
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="#">
-                                About
-                            </Link>
-                        </li>
-                    </ul>     
-                </div>
-            </nav> 
-        </header>
-    ); 
+            {/* Right-side buttons */}
+            <div className="d-flex gap-3 ms-3">
+              <button className="btn btn-login">
+                Login
+              </button>
+              <button className="btn btn-signup">
+                SignUp
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+  );
 }
-
-
