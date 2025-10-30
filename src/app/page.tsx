@@ -59,9 +59,9 @@ export default function Home() {
             <div className="card big-card text-center">
               <img src="/test1.jpg" className="card-img-top" alt="Big Test" />
               <div className="card-body">
-                <h3 className="card-title">Big Card</h3>
+                <h3 className="card-title">Full Blood Count</h3>
                 <p className="card-text">
-                  This is the big card content. You can add images, text, or anything here.
+                  checks red and white blood cells, platelets, and hemoglobin to assess overall health.
                 </p>
               </div>
             </div>
@@ -74,8 +74,8 @@ export default function Home() {
                     <div className="card small-card">
                       <img src="/test1.jpg" className="card-img-top" alt="Test 1" />
                       <div className="card-body">
-                        <h5 className="card-title">Card 1</h5>
-                        <p className="card-text">Some quick example text.</p>
+                        <h5 className="card-title">COVID-19 PCR Test</h5>
+                        <p className="card-text">Detects the presence of the coronavirus using a precise lab method.</p>
                       </div>
                     </div>
                   </div>
@@ -83,8 +83,8 @@ export default function Home() {
                     <div className="card small-card">
                       <img src="/test2.jpg" className="card-img-top" alt="Test 2" />
                       <div className="card-body">
-                        <h5 className="card-title">Card 2</h5>
-                        <p className="card-text">Some quick example text.</p>
+                        <h5 className="card-title">Liver Function Test</h5>
+                        <p className="card-text">Measures liver enzymes and proteins to assess liver health.</p>
                       </div>
                     </div>
                   </div>
@@ -92,8 +92,8 @@ export default function Home() {
                     <div className="card small-card">
                       <img src="/test3.jpg" className="card-img-top" alt="Test 3" />
                       <div className="card-body">
-                        <h5 className="card-title">Card 3</h5>
-                        <p className="card-text">Some quick example text.</p>
+                        <h5 className="card-title">HIV Test</h5>
+                        <p className="card-text">Screens for the HIV virus to ensure early detection and treatment.</p>
                       </div>
                     </div>
                   </div>
@@ -101,8 +101,8 @@ export default function Home() {
                     <div className="card small-card">
                       <img src="/test4.jpg" className="card-img-top" alt="Test 4" />
                       <div className="card-body">
-                        <h5 className="card-title">Card 4</h5>
-                        <p className="card-text">Some quick example text.</p>
+                        <h5 className="card-title">Pregnancy Test</h5>
+                        <p className="card-text">Detects the hormone hCG to confirm pregnancy accurately.</p>
                       </div>
                     </div>
                   </div>
@@ -111,6 +111,50 @@ export default function Home() {
             </div>
           </div>
         </section>
+        {/* User Reviews Section */}
+        <section className="reviews-section">
+          <div className="reviews-wrapper">
+            <h3 className="section-title">What Our Users Say</h3>
+            <div className="row g-4 justify-content-center">
+              {/* Review 1 */}
+              <div className="col-md-4">
+                <div className="card review-card text-center p-3">
+                  <img src="/user1.jpeg" alt="User 1" className="review-avatar mx-auto" />
+                  <div className="card-body">
+                    <h5 className="card-title">Anjali Perera</h5>
+                    <p className="card-text">"Excellent service! The tests were fast and accurate. Highly recommended!"</p>
+                    <div className="stars">⭐⭐⭐⭐⭐</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Review 2 */}
+              <div className="col-md-4">
+                <div className="card review-card text-center p-3">
+                  <img src="/user2.jpg" alt="User 2" className="review-avatar mx-auto" />
+                  <div className="card-body">
+                    <h5 className="card-title">Ravindu Silva</h5>
+                    <p className="card-text">"The staff was friendly and professional. Great experience overall!"</p>
+                    <div className="stars">⭐⭐⭐⭐⭐</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Review 3 */}
+              <div className="col-md-4">
+                <div className="card review-card text-center p-3">
+                  <img src="/user3.png" alt="User 3" className="review-avatar mx-auto" />
+                  <div className="card-body">
+                    <h5 className="card-title">Nadeesha Fernando</h5>
+                    <p className="card-text">"Quick results and easy booking system. Definitely will use again!"</p>
+                    <div className="stars">⭐⭐⭐⭐⭐</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
 
     </main>
   );

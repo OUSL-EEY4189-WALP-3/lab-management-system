@@ -62,7 +62,7 @@ a {
   font-weight: 600;
 }
 .navbar {
-  background-color: #bbd7ef !important; 
+  background-color: #e0f7ff !important; 
 }
 
 /* Custom Login button */
@@ -194,77 +194,121 @@ a {
   font-size: 1.1rem;
   line-height: 1.6;
 }
-/* Small cards */
-.small-card {
-  font-size: 0.85rem; /* smaller text */
-}
-.small-card .card-img-top {
-  height: 80px;       /* small image height */
-  object-fit: cover;  /* crop nicely */
-}
-
-/* Big card */
-.big-card {
-  max-height: 500px; /* total card height */
-}
-.big-card .card-img-top {
-  height: 260px;       /* bigger image height to match small cards height */
-  object-fit: cover;   /* crop nicely */
-  width: 100%;         /* full width */
-}
-.big-card .card-body {
-  padding: 0.75rem;
-  height: auto;
-}
 .tests-section {
   display: flex;
-  justify-content: center; /* center the whole section horizontally */
-  padding: 50px 0;         /* top/bottom spacing */
+  justify-content: center;
+  padding: 50px 0;
 }
 
 .cards-wrapper {
-  background-color: #e0f7ff; /* light blue background around cards */
+  background-color: #e0f7ff;
   padding: 30px;
-  border-radius: 20px;       /* rounded corners */
-  max-width: 1200px;         /* prevent stretching too wide */
+  border-radius: 20px;
+  max-width: 1200px;
   width: 100%;
 }
 
-.section-title {
+.tests-section h3 {
   text-align: center;
   font-weight: bold;
   margin-bottom: 30px;
 }
 
+/* Align columns equally */
+.row.align-items-stretch > [class*="col-"] {
+  display: flex;
+  flex-direction: column;
+}
+
+.tests-section {
+  display: flex;
+  justify-content: center;
+  padding: 50px 0;
+}
+
+.cards-wrapper {
+  background-color: #e0f7ff;
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.tests-section h3 {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+/* Align columns equally */
+.row.align-items-stretch > [class*="col-"] {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Big card */
 .big-card {
-  max-height: 500px;
-  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-
 .big-card .card-img-top {
-  height: 400px;        /* bigger image for height matching */
+  height: 355px;
   object-fit: cover;
   width: 100%;
 }
-
 .big-card .card-body {
-  padding: 0.75rem;
+  flex-grow: 1;
 }
 
+/* Small cards grid */
 .small-card {
+  height: 100%;
   font-size: 0.85rem;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-
 .small-card .card-img-top {
-  height: 80px;
+  height: 150px;
   object-fit: cover;
   width: 100%;
 }
-
 .small-card .card-body {
   padding: 0.5rem;
 }
+
+/* Fix spacing between the small cards */
+.col-md-4 .row.g-3 {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: stretch;
+}
+
+.col-md-4 .col-6 {
+  display: flex;
+}
+.col-md-4 .col-6 .card {
+  flex: 1;
+}
+
+/* Optional: make responsive */
+@media (max-width: 768px) {
+  .row.justify-content-center {
+    flex-direction: column;
+    align-items: center;
+  }
+  .col-md-6,
+  .col-md-4 {
+    width: 100%;
+  }
+  .big-card .card-img-top {
+    height: 250px;
+  }
+}
+
+
 
 .footer-section {
   background-color: #e0f7ff; /* light blue */
@@ -358,3 +402,49 @@ a {
     align-items: center;
   }
 }
+.reviews-section {
+  display: flex;
+  justify-content: center;
+  padding: 50px 0;
+}
+
+.reviews-wrapper {
+  background-color: #e0f7ff; /* same light blue as tests */
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.reviews-section .section-title {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.review-card {
+  border: none;
+  background: white;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.review-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: 10px;
+  border: 3px solid #00aaff;
+}
+
+.stars {
+  color: #ffc107; /* gold */
+  font-size: 1.1rem;
+}
+
