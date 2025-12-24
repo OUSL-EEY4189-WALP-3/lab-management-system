@@ -36,7 +36,7 @@ export default function Header() {
           <div className="collapse navbar-collapse justify-content-end" id="navbarRightContent">
             <ul className="navbar-nav mb-2 mb-lg-0 d-flex align-items-center gap-3">
               <li className="nav-item">
-                <Link className="nav-link d-flex align-items-center" href="#">
+                <Link className="nav-link d-flex align-items-center" href="/">
                   <FiHome className="me-1" /> Home
                 </Link>
               </li>
@@ -53,12 +53,12 @@ export default function Header() {
 
             {/* Right-side buttons */}
             <div className="d-flex gap-3 ms-3">
-              <button className="btn btn-login">
+              <Link href="/login" className="btn btn-login">
                 Login
-              </button>
-              <button className="btn btn-signup">
+              </Link>
+              <Link href="/signup" className="btn btn-signup">
                 SignUp
-              </button>
+              </Link>
             </div>
           </div>
         </div>
