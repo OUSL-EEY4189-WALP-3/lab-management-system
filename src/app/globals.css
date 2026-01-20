@@ -448,3 +448,59 @@ a {
   font-size: 1.1rem;
 }
 
+/* Sidebar */
+.sidebar {
+  width: 240px;
+}
+
+/* Links */
+.sidebar-link {
+  color: #555;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.sidebar-link:hover {
+  background-color: #e9f1ff;
+  color: #0d6efd;
+}
+
+/* Active link ( */
+.sidebar-link.active {
+  background-color: #e9f1ff;
+  color: #0d6efd;
+}
+/* Layout wrapper */
+.dashboard-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f5f6fa;
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 24px;
+  display: flex;
+}
+
+/* Big white rounded card */
+.content-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 30px;
+  min-height: calc(100vh - 60px);
+  flex: 1;
+}
+/* Admin highlight green */
+.text-admin-green {
+  color: #1abc9c !important;
+}
+
+.bg-admin-green {
+  background-color: #1abc9c !important;
+}
+
+.border-admin-green {
+  border-color: #1abc9c !important;
+}

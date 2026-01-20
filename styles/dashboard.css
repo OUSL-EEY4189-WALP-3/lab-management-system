@@ -1,0 +1,74 @@
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f6fa;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  background: #ffffff;
+  padding: 20px;
+  border-right: 1px solid #eee;
+}
+
+.brand {
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.brand span {
+  color: #0d6efd;
+}
+
+.sidebar .nav-item {
+  padding: 12px 10px;
+  cursor: pointer;
+  color: #555;
+  border-radius: 6px;
+  margin-bottom: 5px;
+}
+
+.sidebar .nav-item.active,
+.sidebar .nav-item:hover {
+  background: #e9f1ff;
+  color: #0d6efd;
+}
+
+/* Main */
+.main-content {
+  flex: 1;
+  padding: 30px;
+}
+
+/* Topbar */
+.topbar {
+  background: #fff;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+}
+
+/* Page title */
+.page-title {
+  color: #0d6efd;
+  margin-bottom: 15px;
+}
+
+/* Search */
+.search-box {
+  max-width: 400px;
+  margin-bottom: 25px;
+}
+
+/* Reports */
+.report-card {
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 0 15px rgba(0,0,0,0.05);
+}
+
+.table th {
+  color: #888;
+  font-weight: 600;
+}

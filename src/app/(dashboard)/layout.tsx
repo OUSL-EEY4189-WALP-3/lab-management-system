@@ -1,15 +1,25 @@
 import Sidebar from "@/components/sidebar";
 
 export default function DashboardLayout({
-    children,
+  children,
 }: Readonly<{
-    children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-    const role: "patient" | "admin" = "admin";
-    return (
-        <div>
-            <Sidebar role={role} />
-            <main>{children}</main>;
+  const role: "patient" | "admin" = "patient";
+
+  return (
+    <div className="dashboard-wrapper">
+      
+      {/* Sidebar */}
+      <Sidebar role={role} />
+
+      {/* Main content area */}
+      <main className="dashboard-content">
+        <div className="content-card">
+          {children}
+        </div>
+      </main>
+
     </div>
-    );
+  );
 }
