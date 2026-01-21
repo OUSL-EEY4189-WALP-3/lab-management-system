@@ -11,7 +11,7 @@ export default function Sidebar({ role }: SidebarProps) {
   const menu = sidebarConfig[role];
 
   return (
-    <aside className="bg-white rounded-4 shadow-sm p-3 vh-100 sidebar-wrapper mt-4">
+    <aside className="bg-white rounded-4 shadow-sm p-3 vh-100 sidebar-wrapper mt-4 mb-4">
       {/* Navigation */}
       <nav className="nav flex-column gap-2">
         {menu.map((item) => (

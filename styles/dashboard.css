@@ -1,6 +1,18 @@
+/* ROOT FIX */
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  height: 100%;
+}
+
+/* Dashboard container */
 .dashboard-container {
   display: flex;
-  min-height: 100vh;
+  height: 100%;
   background: #f5f6fa;
 }
 
@@ -10,8 +22,12 @@
   background: #ffffff;
   padding: 20px;
   border-right: 1px solid #eee;
+
+  display: flex;
+  flex-direction: column;
 }
 
+/* Brand */
 .brand {
   font-weight: 700;
   margin-bottom: 30px;
@@ -21,6 +37,7 @@
   color: #0d6efd;
 }
 
+/* Sidebar items */
 .sidebar .nav-item {
   padding: 12px 10px;
   cursor: pointer;
@@ -35,10 +52,13 @@
   color: #0d6efd;
 }
 
-/* Main */
+/* Main content */
 .main-content {
   flex: 1;
   padding: 30px;
+
+  display: flex;
+  flex-direction: column;
 }
 
 /* Topbar */
@@ -61,13 +81,14 @@
   margin-bottom: 25px;
 }
 
-/* Reports */
+/* Report card */
 .report-card {
   border-radius: 12px;
   border: none;
   box-shadow: 0 0 15px rgba(0,0,0,0.05);
 }
 
+/* Table */
 .table th {
   color: #888;
   font-weight: 600;
