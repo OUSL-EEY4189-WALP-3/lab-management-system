@@ -2,7 +2,7 @@ export default function PatientSettings() {
     return (
         <div>
             <h1>Settings</h1>
-            <form>
+            <form style={{ maxWidth: '500px' }}>
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">
                         Full Name

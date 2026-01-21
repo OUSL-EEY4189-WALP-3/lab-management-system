@@ -17,7 +17,7 @@ export default function PatientDashboard() {
       </div>
 
       {/* Profile Card */}
-      <div className="card border-0 shadow-sm mb-4">
+      <div className="card border-0 shadow-sm mb-4 mt-4">
         <div className="card-body">
           <div className="row align-items-center">
 
@@ -28,8 +28,8 @@ export default function PatientDashboard() {
                 alt="profile-image"
                 className="rounded-circle img-fluid"
                 style={{
-                  width: "130px",
-                  height: "130px",
+                  width: "300px",
+                  height: "300px",
                   objectFit: "cover",
                 }}
               />
