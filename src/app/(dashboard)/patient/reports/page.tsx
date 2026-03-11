@@ -34,9 +34,29 @@ export default function Reports() {
         </thead>
         <tbody>
           <tr>
-            <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>Blood Sugar</td>
-            <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>2026/01/20</td>
-            <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>Sirimath</td>
+            <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>Urine Test</td>
+            <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>2026/01/22</td>
+            <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>Admin</td>
+            <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>
+              <button
+                style={{
+                  borderRadius: "12px",
+                  padding: "6px 12px",
+                  backgroundColor: "#4CAF50",
+                  color: "white",
+                  border: "none",
+                  cursor: "pointer",
+                  transition: "0.3s"
+                }}
+              >
+                Download
+              </button>
+            </td>
+          </tr>
+           <tr>
+            <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>Full Blood Count</td>
+            <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>2026/01/22</td>
+            <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>Admin</td>
             <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>
               <button
                 style={{
