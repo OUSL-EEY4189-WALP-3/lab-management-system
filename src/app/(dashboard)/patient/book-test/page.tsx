@@ -5,8 +5,8 @@ export default function BookTest() {
       name: "Full Blood Count",
       image: "/test1.jpg", // place this in public/
       price: 500,
-      startDate: "2026-09-15",
-      endDate: "2026-09-17",
+      startDate: "2026-01-22",
+      endDate: "2026-01-24",
       duration: 2,
     },
     {
@@ -14,8 +14,8 @@ export default function BookTest() {
       name: "Urine Test",
       image: "/test2.jpg",
       price: 300,
-      startDate: "2026-09-18",
-      endDate: "2026-09-19",
+      startDate: "2026-01-22",
+      endDate: "2026-09-24",
       duration: 1,
     },
   ];

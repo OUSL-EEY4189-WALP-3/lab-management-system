@@ -1,7 +1,7 @@
 export default function Booking() {
   const bookings = [
     {
-      testType: "Blood Sugar",
+      testType: "Full Blood Count",
       patientName: "M.A. Wijesinghe",
       date: "2026/01/20",
       payment: "unpaid",
@@ -9,7 +9,7 @@ export default function Booking() {
       image: "/test1.jpg",
     },
     {
-      testType: "COVID Test",
+      testType: "Urine Test",
       patientName: "John Doe",
       date: "2026/01/22",
       payment: "paid",
@@ -18,7 +18,7 @@ export default function Booking() {
     },
   ];
 
-  const statusColor = (status) => {
+  const statusColor = (status:String) => {
     switch (status) {
       case "pending":
         return "bg-gradient-warning text-dark";
