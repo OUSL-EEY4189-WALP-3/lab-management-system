@@ -1,4 +1,12 @@
-export { default as Header} from './Header';
-export { default as Footer} from './Footer';
-export { default as ImageSlider} from './ImageSlider';
-export { default as SideBar} from './sidebar';
+export { default as Header } from "./Header";
+export { default as Footer } from "./Footer";
+export { default as ImageSlider } from "./ImageSlider";
+export { default as SideBar } from "./sidebar";
+export { default as SettingsBar } from "./SettingsBar";
+export { default as EditTestModal } from "./EditTestModal";
+export { default as AddTestModal } from "./AddTestModal";
+export { default as AddUserModal} from "./AddUserModal";
+export { default as EditUserModal} from "./EditUserModal";
+export { default as Providers} from './Providers';
+export { default as UpdateBooking } from './UpdateBooking';
+
