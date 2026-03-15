@@ -17,13 +17,17 @@ export const authOptions: NextAuthOptions = {
                     email: credentials.email,
                 });
 
-                if(!user) throw new Error("User not found");
+                if (!user) throw new Error("User not found");
 
-                const isValid = await bcrypt.compare(credentials.password, user.password);
+                const isValid = await bcrypt.compare(
+                    credentials.password,
+                    user.password,
+                );
 
-                if(!isValid) throw new Error("Wrong password");
+                if (!isValid) throw new Error("Wrong password");
                 return {
                     id: user._id.toString(),
+                    userId: user.userId,
                     name: user.name,
                     email: user.email,
                     role: user.role,
@@ -38,13 +42,19 @@ export const authOptions: NextAuthOptions = {
 
     callbacks: {
         async jwt({ token, user }: any) {
-            if(user) {
+            if (user) {
+                token.id = user.id;
+                token.userId = user.userId;
+                token.userName = user.userName;
                 token.role = user.role;
             }
             return token;
         },
         async session({ session, token }: any) {
-            if(session.user) {
+            if (session.user) {
+                session.user.id = token.id;
+                session.user.userId = token.userId;
+                session.user.userName = token.userName;
                 session.user.role = token.role;
             }
             return session;
@@ -53,4 +63,4 @@ export const authOptions: NextAuthOptions = {
 };
 
 const handler = NextAuth(authOptions);
-export { handler as GET, handler as POST};
+export { handler as GET, handler as POST };

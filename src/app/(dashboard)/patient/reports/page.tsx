@@ -1,80 +1,93 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+
+import { FiDownload } from "react-icons/fi";
+import { IoDocumentOutline } from "react-icons/io5";
+
 export default function Reports() {
-  return (
-    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-      {/* Header */}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
-        <p style={{ margin: 0, fontWeight: "bold" }}>M.A. Wijesinghe</p>
-        <button
-          style={{
-            borderRadius: "12px",
-            padding: "8px 16px",
-            backgroundColor: "#f44336",
-            color: "white",
-            border: "none",
-            cursor: "pointer",
-            transition: "0.3s"
-          }}
-        >
-          Logout
-        </button>
-      </div>
+    const [bookings, setBookings] = useState<any[]>([]);
+    const [tests, setTests] = useState<any[]>([]);
 
-      {/* Page Title */}
-      <h1 style={{ marginBottom: "20px" }}>Reports</h1>
+    async function fetchBookings() {
+        const response = await fetch("/api/booking/user");
+        const data = await response.json();
+        setBookings(data);
+    }
 
-      {/* Table */}
-      <table style={{ width: "100%", borderCollapse: "collapse" }}>
-        <thead>
-          <tr style={{ backgroundColor: "#f2f2f2" }}>
-            <th style={{ padding: "10px", textAlign: "left", borderBottom: "1px solid #ddd" }}>Test type</th>
-            <th style={{ padding: "10px", textAlign: "left", borderBottom: "1px solid #ddd" }}>Date</th>
-            <th style={{ padding: "10px", textAlign: "left", borderBottom: "1px solid #ddd" }}>Checked by</th>
-            <th style={{ padding: "10px", textAlign: "left", borderBottom: "1px solid #ddd" }}>Download</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>Urine Test</td>
-            <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>2026/01/22</td>
-            <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>Admin</td>
-            <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>
-              <button
-                style={{
-                  borderRadius: "12px",
-                  padding: "6px 12px",
-                  backgroundColor: "#4CAF50",
-                  color: "white",
-                  border: "none",
-                  cursor: "pointer",
-                  transition: "0.3s"
-                }}
-              >
-                Download
-              </button>
-            </td>
-          </tr>
-           <tr>
-            <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>Full Blood Count</td>
-            <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>2026/01/22</td>
-            <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>Admin</td>
-            <td style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>
-              <button
-                style={{
-                  borderRadius: "12px",
-                  padding: "6px 12px",
-                  backgroundColor: "#4CAF50",
-                  color: "white",
-                  border: "none",
-                  cursor: "pointer",
-                  transition: "0.3s"
-                }}
-              >
-                Download
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  );
+    async function fetchTests() {
+        const response = await fetch("/api/test/");
+        const data = await response.json();
+        setTests(data);
+    }
+
+    useEffect(() => {
+        fetchBookings();
+        fetchTests();
+    }, []);
+
+    return (
+        <div className="container p-0">
+            <div
+                className="px-4 py-2 mb-4 mt-2"
+                style={{ borderBottom: "1px solid #d6cece" }}
+            >
+                <h2>Reports</h2>
+            </div>
+            <div className="card m-4">
+                <div className="card-header d-flex align-items-center gap-2">
+                    <IoDocumentOutline /> Report details
+                </div>
+                <div className="card-body">
+                    <table className="table table-bordered table-radius">
+                        <thead className="text-center" style={{fontSize: "14px"}}>
+                            <tr>
+                                <th>ID</th>
+                                <th>Test</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Status</th>  
+                            </tr>
+                        </thead>
+                        <tbody className="text-center">
+                            {bookings.map((booking) => (
+                                <tr key={booking._id} style={{fontSize: "16px"}}>
+                                    <td>{booking.bookingId}</td>
+                                    <td>
+                                        {
+                                            tests.find(
+                                                (test) =>
+                                                    test.testId ===
+                                                    booking.testId,
+                                            )?.testName
+                                        }
+                                    </td>
+                                    <td>{booking.date}</td>
+                                    <td>{booking.time}</td>
+                                    <td>{booking.status}</td>
+                                    <td>
+                                        {booking.reportUrl ? (
+                                            <Link
+                                                href={booking.reportUrl}
+                                                target="_blank"
+                                                className="btn btn-secondary d-flex justify-content-center align-items-center gap-2 py-1 px-3 "
+                                            >
+                                                <FiDownload />
+                                                Download
+                                            </Link>
+                                        ) : (
+                                            <span className="text-muted">
+                                                Not Available
+                                            </span>
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    );
 }

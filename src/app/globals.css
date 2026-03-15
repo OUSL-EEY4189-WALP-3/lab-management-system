@@ -475,17 +475,17 @@ a {
 .dashboard-wrapper {
   display: flex;
   min-height: 100vh;
-  background-color: #f5f6fa;
+  background-color: #e3f2fd;
 }
 
-.dashboard-content {
+/* .dashboard-content {
   flex: 1;
   padding: 24px;
   display: flex;
-}
+} */
 
 /* Big white rounded card */
-.content-card {
+/* .content-card {
   background: #ffffff;
   border-radius: 18px;
   padding: 30px;
@@ -493,7 +493,7 @@ a {
   flex: 1;                 
   min-height: 0;            
   overflow-y: auto;         
-}
+} */
 
 /* Admin highlight green */
 .text-admin-green {
@@ -507,3 +507,5 @@ a {
 .border-admin-green {
   border-color: #1abc9c !important;
 }
+
+

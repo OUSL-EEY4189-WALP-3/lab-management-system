@@ -17,14 +17,16 @@ export default async function DashboardLayout({
   const role = session.user.role;
   
   return (
-    <div className="dashboard-wrapper">
+    <div className="d-flex ">
       
       {/* Sidebar */}
-      <Sidebar role={role} />
+      <div style={{borderRight: "1px solid #d6cece", paddingTop: 50, minWidth: 150, maxWidth: 150, width: 150}}>
+          <Sidebar role={role} />
+      </div>
 
       {/* Main content area */}
-      <main className="dashboard-content">
-        <div className="content-card">
+      <main style={{flexGrow: 1}}>
+        <div>
           {children}
         </div>
       </main>

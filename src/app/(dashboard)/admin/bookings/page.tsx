@@ -1,90 +1,149 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { UpdateBooking } from "@/components";
+
+import { BiSolidEdit } from "react-icons/bi";
+import { FiUpload } from "react-icons/fi";
+import { CiBookmarkCheck } from "react-icons/ci";
+
 export default function Booking() {
-  const bookings = [
-    {
-      testType: "Full Blood Count",
-      patientName: "M.A. Wijesinghe",
-      date: "2026/01/20",
-      payment: "unpaid",
-      status: "pending",
-      image: "/test1.jpg",
-    },
-    {
-      testType: "Urine Test",
-      patientName: "John Doe",
-      date: "2026/01/22",
-      payment: "paid",
-      status: "completed",
-      image: "/test2.jpg",
-    },
-  ];
+    const [bookings, setBookings] = useState<any[]>([]);
+    const [tests, setTests] = useState<any[]>([]);
+    const [selectedId, setSelectedId] = useState("");
+    const [file, setFile] = useState<File | null>(null);
+    const [showUpdateModal, setShowUpdateModal] = useState(false);
 
-  const statusColor = (status:String) => {
-    switch (status) {
-      case "pending":
-        return "bg-gradient-warning text-dark";
-      case "ongoing":
-        return "bg-gradient-info text-dark";
-      case "completed":
-        return "bg-gradient-success text-white";
-      default:
-        return "bg-secondary text-white";
+    async function fetchBookings() {
+        try {
+            const response = await fetch("/api/booking");
+            const data = await response.json();
+            setBookings(data);
+        } catch (error) {
+            console.log("Error while fetching: ", error);
+        }
     }
-  };
 
+    async function fetchTests() {
+        try {
+            const response = await fetch("/api/test");
+            const data = await response.json();
+            setTests(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
+    async function handleUpload(id: string) {
+        if (!file) return;
 
-  return (
-    <div className="container py-4">
-      {/* Header */}
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <p className="h5 mb-0">M.A. Wijesinghe</p>
-        <button className="btn btn-danger">Logout</button>
-      </div>
+        const formData = new FormData();
+        formData.append("report", file);
+        formData.append("bookingId", id);
 
-      <h1 className="mb-4">Bookings</h1>
+        await fetch("/api/upload", {
+            method: "POST",
+            body: formData,
+        });
+        alert("Report Uploaded");
+    }
 
-      {/* Booking Cards */}
-      <div className="row g-4">
-        {bookings.map((booking, index) => (
-          <div key={index} className="col-12 col-md-6 col-lg-4">
-            <div className="card h-100 shadow-sm">
-              <img
-                src={booking.image}
-                className="card-img-top"
-                alt={booking.testType}
-                style={{ height: "180px", objectFit: "cover" }}
-              />
-              <div className="card-body d-flex flex-column">
-                <h5 className="card-title">{booking.testType}</h5>
-                <p className="mb-1"><strong>Patient:</strong> {booking.patientName}</p>
-                <p className="mb-3"><strong>Date:</strong> {booking.date}</p>
+    useEffect(() => {
+        fetchBookings();
+        fetchTests();
+    }, [showUpdateModal]);
 
-                <div className="mb-2">
-                  <label className="form-label mb-1">Payment</label>
-                  <select
-                    className="form-select form-select-sm"
-                    defaultValue={booking.payment}
-                  >
-                    <option value="unpaid">Unpaid</option>
-                    <option value="paid">Paid</option>
-                  </select>
-                </div>
-
-                <div className="mb-3">
-                  <label className="form-label mb-1">Status</label>
-                  <span
-                    className={`badge ${statusColor(booking.status)} rounded-pill`}
-                  >
-                    {booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
-                  </span>
-                </div>
-
-                <button className="btn btn-primary mt-auto">Upload</button>
-              </div>
+    return (
+        <div className="container p-0">
+            <div className="px-4 py-2 mb-4 mt-2" style={{borderBottom: "1px solid #d6cece"}}>
+                <h2>Bookings</h2>
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+            <div className="card m-4">
+                <div className="card-header">
+                    <CiBookmarkCheck className="m-2" />
+                    Booking Details
+                </div>
+                <div className="card-body">
+                    <table className="table table-bordered table-radius">
+                        <thead className="text-center" style={{fontSize: "14px"}}>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Test</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody className="text-center">
+                            {bookings.map((booking) => (
+                                <tr key={booking._id} style={{fontSize: "16px"}}>
+                                    <td>{booking.bookingId}</td>
+                                    <td>{booking.userName}</td>
+                                    <td>
+                                        {
+                                            tests.find(
+                                                (test) =>
+                                                    test.testId ===
+                                                    booking.testId,
+                                            )?.testName
+                                        }
+                                    </td>
+                                    <td>{booking.date}</td>
+                                    <td>{booking.time}</td>
+                                    <td>{booking.status}</td>
+                                    <td>
+                                        <button
+                                            onClick={() => {
+                                                setShowUpdateModal(true);
+                                                setSelectedId(booking._id);
+                                            }}
+                                            id={booking._id}
+                                            className="btn btn-primary d-flex align-items-center py-1 px-3 gap-2"
+                                        >
+                                            <BiSolidEdit />
+                                            Update
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <div className="input-group">
+
+                                            <input
+                                            className="form-control"
+                                                type="file"
+                                                accept="application/pdf"
+                                                onChange={(e) =>
+                                                    setFile(
+                                                        e.target.files?.[0] ||
+                                                            null,
+                                                    )
+                                                }
+                                            ></input>
+                                            <button
+                                                onClick={() => {
+                                                    setSelectedId(booking._id);
+                                                    handleUpload(booking._id);
+                                                }}
+                                                className="btn btn-secondary d-flex align-items-center py-1 px-3 gap-2"
+                                            >
+                                                <FiUpload />
+                                                Upload
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <UpdateBooking
+                show={showUpdateModal}
+                onClose={() => setShowUpdateModal(false)}
+                id={selectedId}
+            />
+        </div>
+    );
 }

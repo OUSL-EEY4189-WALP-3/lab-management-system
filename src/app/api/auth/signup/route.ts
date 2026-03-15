@@ -1,4 +1,5 @@
 import { connectDB } from "@/lib/mongodb";
+import { getNextSequence } from "@/lib/nextSequence";
 import User from "@/models/User";
 import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
@@ -15,13 +16,17 @@ export async function POST(req: Request) {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
+        const sequence = await getNextSequence("userId");
+        const userId = `U-${sequence}`;
+
         await User.create({
+            userId,
             name,
             age,
             contact,
             email,
             password: hashedPassword,
-            role: "patient" as String,
+            role: "patient",
         });
         return NextResponse.json({ messege: "User created" }, { status: 201 });
     } catch {

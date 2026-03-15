@@ -1,99 +1,124 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { connectDB } from "@/lib/mongodb";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
-import User from "@/models/User";
+"use client";
 
-export default async function PatientDashboard() {
+import { useRouter } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 
-    const session = await getServerSession(authOptions);
-    if(!session) {
-      redirect("/login")
+import { RiAccountCircle2Line } from "react-icons/ri";
+import { useEffect, useState } from "react";
+
+export default function PatientDashboard() {
+    const { data: session, status } = useSession();
+    const [name, setName] = useState("");
+    const [age, setAge] = useState("");
+    const [contact, setContact] = useState("");
+    const [email, setEmail] = useState("");
+    const router = useRouter();
+
+    async function fetchUser(id: string) {
+        const response = await fetch(`/api/user/${id}`);
+        if (!response.ok) {
+            return;
+        }
+        const data = await response.json();
+        if (!data) {
+            return;
+        }
+        setName(data.name);
+        setAge(data.age);
+        setContact(data.contact);
+        setEmail(data.email);
     }
-    await connectDB();
-    const user = await User.findOne({email: session.user.email}).lean();
-    if(!user) {
-      console.log("No user found.")
-    }
+
+    useEffect(() => {
+        if (status === "unauthenticated") {
+            router.push("/login");
+        }
+        if (session?.user?.id) {
+            fetchUser(session.user.id);
+        }
+    }, [session]);
+
     return (
-        <div className="h-100">
-            {/* Top Row */}
-            <div className="d-flex justify-content-between align-items-center mb-4">
-                <div>
-                    <h4 className="fw-bold mb-0 text-primary">
-                        Patient Dashboard
-                    </h4>
-                    <small className="text-muted">
-                        Welcome back, {user.name}
-                    </small>
+        <div className="container p-0">
+            <div
+                className="px-4 py-2 mb-4 mt-2 d-flex justify-content-between align-items-center"
+                style={{ borderBottom: "1px solid #d6cece" }}
+            >
+                <h2>Dashboard</h2>
+                <div className="d-flex justify-content-center align-items-center gap-2">
+                    <div
+                        className="px-2 py-1 d-flex justify-content-center align-items-center gap-2"
+                        style={{
+                            border: "1px solid #d6cece",
+                            borderRadius: 20,
+                        }}
+                    >
+                        <RiAccountCircle2Line className="fs-2" />{" "}
+                        <div className="vr"></div> {name}
+                    </div>
+                    <button
+                        onClick={() => signOut({ callbackUrl: "/login" })}
+                        className="btn btn-danger py-2 px-4"
+                        style={{ borderRadius: 20 }}
+                    >
+                        Logout
+                    </button>
                 </div>
-
             </div>
+           
 
-            {/* Profile Card */}
-            <div className="card border-0 shadow-sm mb-4 mt-4">
-                <div className="card-body">
-                    <div className="row align-items-center">
-                        {/* Avatar */}
-                        <div className="col-md-3 text-center mb-3 mb-md-0">
-                            <img
-                                src="/user2.jpg"
-                                alt="profile-image"
-                                className="rounded-circle img-fluid"
-                                style={{
-                                    width: "300px",
-                                    height: "300px",
-                                    objectFit: "cover",
-                                }}
-                            />
-                        </div>
-
-                        {/* Details */}
-                        <div className="col-md-9">
-                            <div className="row">
-                                <div className="col-md-6 mb-3">
-                                    <small className="text-muted">
-                                        Full Name
-                                    </small>
-                                    <p className="fw-semibold mb-0">
-                                        {user.name}
-                                    </p>
-                                </div>
-
-                                <div className="col-md-6 mb-3">
-                                    <small className="text-muted">Age</small>
-                                    <p className="fw-semibold mb-0">{user.age}</p>
-                                </div>
-
-                                <div className="col-md-6 mb-3">
-                                    <small className="text-muted">Gender</small>
-                                    <p className="fw-semibold mb-0">{user.gender}</p>
-                                </div>
-
-                                <div className="col-md-6 mb-3">
-                                    <small className="text-muted">
-                                        Contact
-                                    </small>
-                                    <p className="fw-semibold mb-0">
-                                        {user.contact}
-                                    </p>
-                                </div>
-
-                                <div className="col-md-6 mb-3">
-                                    <small className="text-muted">Email</small>
-                                    <p className="fw-semibold mb-0">
-                                        {user.email}
-                                    </p>
-                                </div>
-
-                                <div className="col-md-6 mb-3">
-                                    <small className="text-muted">
-                                        Blood Type
-                                    </small>
-                                    <p className="fw-semibold mb-0">A+</p>
-                                </div>
+            <div className="d-flex justify-content-center align-items-center" style={{marginTop: 100}}>
+                <div className="card">
+                    <div className="card-header text-center">Patient Profile</div>
+                    <div className="card-body">
+                        <div className="d-flex gap-4">
+                            <div className="input-group mb-3">
+                                <span className="input-group-text">Name</span>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    value={name}
+                                    disabled
+                                ></input>
+                            </div>
+                            <div className="input-group mb-3">
+                                <span className="input-group-text">Age</span>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    value={age}
+                                    disabled
+                                ></input>
                             </div>
                         </div>
+                        <div className="d-flex gap-4">
+                            <div className="input-group mb-3">
+                                <span className="input-group-text">Contact</span>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    value={contact}
+                                    disabled
+                                ></input>
+                            </div>
+                            <div className="input-group mb-3">
+                                <span className="input-group-text">Email</span>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    value={email}
+                                    disabled
+                                ></input>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="card-footer d-flex justify-content-around">
+                        <Link href={"/patient/settings"}>Edit Profile</Link>
+                        <div className="vr"></div>
+                        <Link href={"/patient/book-test"}>Book Test</Link>
+                        <div className="vr"></div>
+                        <Link href={"/patient/reports"}>View Reports</Link>
                     </div>
                 </div>
             </div>
