@@ -5,6 +5,7 @@ import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 import { RiAccountCircle2Line } from "react-icons/ri";
+import Link from "next/link";
 
 export default function AdminDashboard() {
     const { data: session, status } = useSession();
@@ -55,6 +56,16 @@ export default function AdminDashboard() {
             >
                 <h2>Dashboard</h2>
                 <div className="d-flex justify-content-center align-items-center gap-2">
+                    <Link
+                    href="/"
+                        className="px-2 py-1 d-flex justify-content-center align-items-center gap-2"
+                        style={{
+                            border: "1px solid #d6cece",
+                            borderRadius: 20,
+                        }}
+                    >
+                       Home
+                    </Link>
                     <div
                         className="px-2 py-1 d-flex justify-content-center align-items-center gap-2"
                         style={{
@@ -62,7 +73,7 @@ export default function AdminDashboard() {
                             borderRadius: 20,
                         }}
                     >
-                        <RiAccountCircle2Line className="fs-2" />{" "}
+                        <RiAccountCircle2Line className="fs-2" />
                         <div className="vr"></div> {name}
                     </div>
                     <button
@@ -124,7 +135,7 @@ export default function AdminDashboard() {
                         <h5 className="card-title">Progress</h5>
                         <div
                             className="progress my-4"
-                            area-valuenow={percentage}
+                            area-valuenow={percentage || ""}
                             area-valuemin="0"
                             area-valuemax="100"
                         >

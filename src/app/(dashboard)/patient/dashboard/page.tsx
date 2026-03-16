@@ -47,6 +47,16 @@ export default function PatientDashboard() {
             >
                 <h2>Dashboard</h2>
                 <div className="d-flex justify-content-center align-items-center gap-2">
+                    <Link
+                        href="/"
+                        className="px-2 py-1 d-flex justify-content-center align-items-center gap-2"
+                        style={{
+                            border: "1px solid #d6cece",
+                            borderRadius: 20,
+                        }}
+                    >
+                        Home
+                    </Link>
                     <div
                         className="px-2 py-1 d-flex justify-content-center align-items-center gap-2"
                         style={{
@@ -66,11 +76,15 @@ export default function PatientDashboard() {
                     </button>
                 </div>
             </div>
-           
 
-            <div className="d-flex justify-content-center align-items-center" style={{marginTop: 100}}>
+            <div
+                className="d-flex justify-content-center align-items-center"
+                style={{ marginTop: 100 }}
+            >
                 <div className="card">
-                    <div className="card-header text-center">Patient Profile</div>
+                    <div className="card-header text-center">
+                        Patient Profile
+                    </div>
                     <div className="card-body">
                         <div className="d-flex gap-4">
                             <div className="input-group mb-3">
@@ -94,7 +108,9 @@ export default function PatientDashboard() {
                         </div>
                         <div className="d-flex gap-4">
                             <div className="input-group mb-3">
-                                <span className="input-group-text">Contact</span>
+                                <span className="input-group-text">
+                                    Contact
+                                </span>
                                 <input
                                     type="text"
                                     className="form-control"
