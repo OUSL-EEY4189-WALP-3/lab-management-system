@@ -1,8 +1,15 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+
 import { MdEmail } from "react-icons/md";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { FaLocationDot, FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
 
 export default function Footer() {
+  const pathname = usePathname();
+      if(pathname.startsWith('/patient' ) || pathname.startsWith('/admin')) return null;
   return (
     <footer className="footer-section">
       <div className="footer-container">
@@ -20,7 +27,7 @@ export default function Footer() {
         {/* Right Side */}
         <div className="footer-right">
           <p className="footer-cta">Book an appointment now</p>
-          <button className="footer-btn">Book Now</button>
+          <Link href="/patient/book-test" className="footer-btn">Book Now</Link>
 
           <div className="footer-social">
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">

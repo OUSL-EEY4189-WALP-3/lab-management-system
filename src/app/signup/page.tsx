@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 export default function SignUp() {
     const [name, setName] = useState("");
@@ -9,6 +11,7 @@ export default function SignUp() {
     const [password, setPassword] = useState("");
     const [confirmPass, setConfirmPass] = useState("");
     const [error, setError] = useState("");
+    const router = useRouter();
 
     function handleReset() {
         setName("");
@@ -42,6 +45,7 @@ export default function SignUp() {
 
             if (response.ok) {
                 handleReset();
+                router.push('/login');
             } 
             else {
                 setError(data.message);

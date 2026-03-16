@@ -2,76 +2,104 @@
 
 import Link from "next/link";
 import { FiHome } from "react-icons/fi";
-import { MdMailOutline } from "react-icons/md";
-import { SessionProvider, useSession } from "next-auth/react";
+import { RiAccountCircle2Line } from "react-icons/ri";
+import { signOut, useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+    const { data: session } = useSession();
+
+    const pathname = usePathname();
+    if(pathname.startsWith('/patient' ) || pathname.startsWith('/admin')) return null;
+
     return (
         <header>
             <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top">
                 <div className="container">
-                    {/* Logo */}
                     <Link className="navbar-brand" href="/">
-                        <img
-                            src="/logo.png"
-                            alt="logo"
-                            width={200}
-                            height={60}
-                        />
+                        <img src="/logo.png" alt="logo" height={50} />
                     </Link>
 
-                    {/* Toggler for mobile */}
+                    {/* Mobile toggle */}
                     <button
                         className="navbar-toggler"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
                     >
                         <span className="navbar-toggler-icon"></span>
                     </button>
 
-                    {/* Navbar links */}
+                    {/* Navbar Content */}
                     <div
-                        className="collapse navbar-collapse justify-content-end"
-                        id="navbarRightContent"
+                        className="collapse navbar-collapse justify-content-between"
+                        id="navbarSupportedContent"
                     >
-                        <ul className="navbar-nav mb-2 mb-lg-0 d-flex align-items-center gap-3">
+                        {/* CENTER NAV LINKS */}
+                        <ul className="navbar-nav mx-auto mb-2 mb-lg-0 d-flex gap-3 fs-5">
                             <li className="nav-item">
                                 <Link
-                                    className="nav-link d-flex align-items-center"
+                                    className="nav-link d-flex justify-content-center align-items-center gap-2"
                                     href="/"
                                 >
-                                    <FiHome className="me-1" /> Home
+                                    <FiHome className="" /> Home
                                 </Link>
                             </li>
+
                             <li className="nav-item">
-                                <Link className="nav-link" href="#">
-                                    Services
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" href="#">
+                                <Link className="nav-link" href="/about">
                                     About
                                 </Link>
                             </li>
+
                             <li className="nav-item">
-                                <Link className="nav-link" href="#">
+                                <Link className="nav-link" href="/contact">
                                     Contact
                                 </Link>
                             </li>
                         </ul>
 
-                        {/* Right-side buttons */}
-                        <div className="d-flex gap-3 ms-3">
-                            <Link href="/login" className="btn btn-login">
-                                Login
-                            </Link>
-                            <Link href="/signup" className="btn btn-signup">
-                                SignUp
-                            </Link>
+            
+                        <div className="d-flex gap-3 justify-content-center align-items-center">
+                            {session ? (
+                                <>
+                                    <Link href="/dashboard"
+                                        className="px-2 py-1 d-flex justify-content-center align-items-center gap-2"
+                                        style={{
+                                            border: "1px solid #d6cece",
+                                            borderRadius: 20,
+                                            backgroundColor:"#eaeaea"
+                                        }}
+                                    >
+                                        <RiAccountCircle2Line className="fs-2" />
+                                        <div className="vr"></div> {session.user.name}
+                                    </Link>
+
+                                    <button
+                                        onClick={() => signOut({ callbackUrl: "/login"})}
+                                        className="btn btn-danger"
+                                        style={{ borderRadius: 20 }}
+                                    >
+                                        Logout
+                                    </button>
+                                </>
+                            ) : (
+                                <>
+                                    <Link
+                                        href="/login"
+                                        className="btn btn-login"
+                                    >
+                                        Login
+                                    </Link>
+
+                                    <Link
+                                        href="/signup"
+                                        className="btn btn-signup"
+                                    >
+                                        SignUp
+                                    </Link>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>
