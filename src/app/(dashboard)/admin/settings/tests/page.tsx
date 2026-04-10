@@ -7,6 +7,12 @@ import { useState, useEffect } from "react";
 import { FaPlus } from "react-icons/fa6";
 import { BiSolidEdit } from "react-icons/bi";
 import { GrTest } from "react-icons/gr";
+import { CiEdit } from "react-icons/ci";
+import { IoLockClosed } from "react-icons/io5";
+import { PiSealCheckFill } from "react-icons/pi";
+
+
+
 
 export default function TestManagement() {
     const [showAddModel, setAddShowModel] = useState(false);
@@ -35,14 +41,14 @@ export default function TestManagement() {
 
                     <button
                         onClick={() => setAddShowModel(true)}
-                        className="btn btn-primary d-flex gap-2 align-items-center"
+                        className="btn btn-primary d-flex gap-2 align-items-center "
                     >
                         <FaPlus className="mr-3" />
                         Add New Test
                     </button>
                 </div>
                 <div className="card-body">
-                    <table className="table table-bordered table-radius">
+                    <table className="table border-secondary table-radius table-hover">
                         <thead
                             className="text-center"
                             style={{ fontSize: "14px" }}
@@ -63,7 +69,7 @@ export default function TestManagement() {
                                     <td>{test.testName}</td>
                                     <td>{test.specimenType}</td>
                                     <td>
-                                        {test.status ? "Active" : "Inactive"}
+                                        <div>{test.status ? <div className="d-flex align-items-center gap-2 justify-content-center"><PiSealCheckFill color="green"/>Active</div> : <div className="d-flex align-items-center justify-content-center gap-2"><IoLockClosed color="red"/>Inactive</div>}</div>
                                     </td>
                                     <td>{test.price}</td>
                                     <td className="d-flex justify-content-center">
@@ -73,9 +79,9 @@ export default function TestManagement() {
                                                 setSelectedId(test._id);
                                             }}
                                             id={test._id}
-                                            className="btn btn-primary d-flex align-items-center py-1 px-3 gap-2"
+                                            className="btn d-flex align-items-center py-1 px-4 gap-2 rounded-pill border border-success"
                                         >
-                                            <BiSolidEdit />
+                                            <CiEdit />
                                             Edit Test
                                         </button>
                                     </td>

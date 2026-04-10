@@ -2,10 +2,16 @@
 
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
-import { RiAccountCircle2Line } from "react-icons/ri";
-import { useEffect, useState } from "react";
+import { PiUserListLight } from "react-icons/pi";
+import { FiHome } from "react-icons/fi";
+import { LuLogOut } from "react-icons/lu";
+import { CiEdit } from "react-icons/ci";
+import { CiBookmarkPlus } from "react-icons/ci";
+import { HiOutlineDocumentReport } from "react-icons/hi";
+
 
 export default function PatientDashboard() {
     const { data: session, status } = useSession();
@@ -49,92 +55,100 @@ export default function PatientDashboard() {
                 <div className="d-flex justify-content-center align-items-center gap-2">
                     <Link
                         href="/"
-                        className="px-2 py-1 d-flex justify-content-center align-items-center gap-2"
-                        style={{
-                            border: "1px solid #d6cece",
-                            borderRadius: 20,
-                        }}
+                        className="px-3 py-1 d-flex justify-content-center align-items-center gap-2 border border-success rounded-pill text-muted"
                     >
+                        <FiHome />
                         Home
                     </Link>
-                    <div
-                        className="px-2 py-1 d-flex justify-content-center align-items-center gap-2"
-                        style={{
-                            border: "1px solid #d6cece",
-                            borderRadius: 20,
-                        }}
-                    >
-                        <RiAccountCircle2Line className="fs-2" />{" "}
-                        <div className="vr"></div> {name}
+                    <div className="px-3 py-1 d-flex justify-content-center align-items-center gap-2 border border-primary rounded-pill text-muted">
+                        <PiUserListLight />
+                        <div className="vr bg-primary"></div> {name}
                     </div>
                     <button
                         onClick={() => signOut({ callbackUrl: "/login" })}
-                        className="btn btn-danger py-2 px-4"
+                        className="btn btn-danger py-1 px-3 d-flex align-items-center gap-2"
                         style={{ borderRadius: 20 }}
                     >
                         Logout
+                        <LuLogOut />
                     </button>
                 </div>
             </div>
 
-            <div
-                className="d-flex justify-content-center align-items-center"
-                style={{ marginTop: 100 }}
-            >
-                <div className="card">
-                    <div className="card-header text-center">
-                        Patient Profile
+            <div className="d-flex justify-content-center">
+                <div
+                    className="card border border-muted border-2 shadow-sm p-4"
+                    style={{
+                        borderRadius: "20px",
+                        width: "100%",
+                        maxWidth: "700px",
+                    }}
+                >
+                    <div className="text-center mb-4">
+                        <img
+                            src="/male.png"
+                            alt="profile"
+                            className="rounded-circle mb-3"
+                            style={{
+                                width: 100,
+                                height: 100,
+                                objectFit: "cover",
+                                border: "4px solid #f1f1f1",
+                            }}
+                        />
+                        <h4 className="fw-bold mb-0">{name}</h4>
+                        <small className="text-muted">Patient</small>
                     </div>
-                    <div className="card-body">
-                        <div className="d-flex gap-4">
-                            <div className="input-group mb-3">
-                                <span className="input-group-text">Name</span>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    value={name}
-                                    disabled
-                                ></input>
-                            </div>
-                            <div className="input-group mb-3">
-                                <span className="input-group-text">Age</span>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    value={age}
-                                    disabled
-                                ></input>
+                    <div className="row text-center">
+                        <div className="col-6 mb-3">
+                            <div className="bg-light p-2 rounded-4 border border-muted">
+                                <small className="text-muted d-block">
+                                    Age
+                                </small>
+                                <p className="fs-5">{age}</p>
                             </div>
                         </div>
-                        <div className="d-flex gap-4">
-                            <div className="input-group mb-3">
-                                <span className="input-group-text">
+                        <div className="col-6 mb-3">
+                            <div className="bg-light p-2 rounded-4 border border-muted">
+                                <small className="text-muted d-block">
                                     Contact
-                                </span>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    value={contact}
-                                    disabled
-                                ></input>
+                                </small>
+                                <p className="fs-5">{contact}</p>
                             </div>
-                            <div className="input-group mb-3">
-                                <span className="input-group-text">Email</span>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    value={email}
-                                    disabled
-                                ></input>
+                        </div>
+                        <div className="col-12">
+                            <div className="bg-light p-2 rounded-4 border border-muted">
+                                <small className="text-muted d-block">
+                                    Email
+                                </small>
+                                <p className="fs-5">{email}</p>
                             </div>
                         </div>
                     </div>
-                    <div className="card-footer d-flex justify-content-around">
-                        <Link href={"/patient/settings"}>Edit Profile</Link>
-                        <div className="vr"></div>
-                        <Link href={"/patient/book-test"}>Book Test</Link>
-                        <div className="vr"></div>
-                        <Link href={"/patient/reports"}>View Reports</Link>
+                    <div className="d-flex justify-content-between mt-4 gap-2 flex-wrap">
+                        <Link
+                            href="/patient/settings"
+                            className="d-flex align-items-center justify-content-center gap-2 btn btn-outline-primary rounded-pill px-3 flex-fill"
+                        >
+                            <CiEdit />
+                            Edit Profile
+                        </Link>
+
+                        <Link
+                            href="/patient/book-test"
+                            className="d-flex align-items-center justify-content-center gap-2 btn btn-primary rounded-pill px-3 flex-fill"
+                        >
+                            <CiBookmarkPlus />
+                            Book Test
+                        </Link>
+
+                        <Link
+                            href="/patient/reports"
+                            className="d-flex align-items-center justify-content-center gap-2 btn btn-outline-dark rounded-pill px-3 flex-fill"
+                        >
+                            <HiOutlineDocumentReport />
+                            Reports
+                        </Link>
                     </div>
                 </div>
             </div>

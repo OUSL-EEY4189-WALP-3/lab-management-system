@@ -9,4 +9,4 @@ export { default as AddUserModal} from "./AddUserModal";
 export { default as EditUserModal} from "./EditUserModal";
 export { default as Providers} from './Providers';
 export { default as UpdateBooking } from './UpdateBooking';
-
+export { default as BootstrapClient } from './BootstrapClient';

@@ -6,11 +6,15 @@ import { RiAccountCircle2Line } from "react-icons/ri";
 import { signOut, useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 
+import { LuLogOut } from "react-icons/lu";
+import { PiUserListLight } from "react-icons/pi";
+
 export default function Header() {
     const { data: session } = useSession();
 
     const pathname = usePathname();
-    if(pathname.startsWith('/patient' ) || pathname.startsWith('/admin')) return null;
+    if (pathname.startsWith("/patient") || pathname.startsWith("/admin"))
+        return null;
 
     return (
         <header>
@@ -32,26 +36,25 @@ export default function Header() {
 
                     {/* Navbar Content */}
                     <div
-                        className="collapse navbar-collapse justify-content-between"
+                        className="collapse navbar-collapse justify-content-center"
                         id="navbarSupportedContent"
                     >
                         {/* CENTER NAV LINKS */}
-                        <ul className="navbar-nav mx-auto mb-2 mb-lg-0 d-flex gap-3 fs-5">
+                        <ul className="navbar-nav mx-lg-auto mb-2 mb-lg-0 d-flex flex-column flex-lg-row gap-3 fs-5 text-start text-lg-center">
+                            {" "}
                             <li className="nav-item">
                                 <Link
-                                    className="nav-link d-flex justify-content-center align-items-center gap-2"
+                                    className="nav-link d-flex align-items-center gap-2"
                                     href="/"
                                 >
-                                    <FiHome className="" /> Home
+                                    <FiHome /> Home
                                 </Link>
                             </li>
-
                             <li className="nav-item">
                                 <Link className="nav-link" href="/about">
                                     About
                                 </Link>
                             </li>
-
                             <li className="nav-item">
                                 <Link className="nav-link" href="/contact">
                                     Contact
@@ -59,28 +62,29 @@ export default function Header() {
                             </li>
                         </ul>
 
-            
                         <div className="d-flex gap-3 justify-content-center align-items-center">
                             {session ? (
                                 <>
-                                    <Link href="/dashboard"
-                                        className="px-2 py-1 d-flex justify-content-center align-items-center gap-2"
+                                    <Link
+                                        href="/dashboard"
+                                        className="px-3 py-1 d-flex justify-content-center align-items-center gap-2 border border-primary rounded-pill text-muted"
                                         style={{
-                                            border: "1px solid #d6cece",
-                                            borderRadius: 20,
-                                            backgroundColor:"#eaeaea"
+                                            backgroundColor: "transparent",
                                         }}
                                     >
-                                        <RiAccountCircle2Line className="fs-2" />
-                                        <div className="vr"></div> {session.user.name}
+                                        <PiUserListLight />
+                                        <div className="vr"></div>{" "}
+                                        {session.user.name}
                                     </Link>
 
                                     <button
-                                        onClick={() => signOut({ callbackUrl: "/login"})}
-                                        className="btn btn-danger"
-                                        style={{ borderRadius: 20 }}
+                                        onClick={() =>
+                                            signOut({ callbackUrl: "/login" })
+                                        }
+                                        className="btn btn-danger py-1 px-3 d-flex align-items-center gap-2 rounded-pill"
                                     >
                                         Logout
+                                        <LuLogOut />
                                     </button>
                                 </>
                             ) : (
