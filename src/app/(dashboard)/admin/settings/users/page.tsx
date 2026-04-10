@@ -6,6 +6,7 @@ import { AddUserModal, EditUserModal } from "@/components";
 import { FaPlus } from "react-icons/fa6";
 import { BiSolidEdit } from "react-icons/bi";
 import { CiUser } from "react-icons/ci";
+import { CiEdit } from "react-icons/ci";
 
 export default function UserManagement() {
     const [showAddUserModel, setShowAddUserModel] = useState(false);
@@ -41,7 +42,7 @@ export default function UserManagement() {
                     </button>
                 </div>
                 <div className="card-body">
-                    <table className="table table-bordered table-radius">
+                    <table className="table border-secondary table-radius table-hover">
                         <thead
                             className="text-center"
                             style={{ fontSize: "14px" }}
@@ -72,10 +73,10 @@ export default function UserManagement() {
                                                 setSelectedId(user._id);
                                             }}
                                             id={user._id}
-                                            className="btn btn-primary d-flex align-items-center py-1 px-3 gap-2"
+                                            className="btn d-flex align-items-center py-1 px-3 gap-2 border border-success rounded-pill"
                                         >
-                                            <BiSolidEdit />
-                                            Edit Test
+                                            <CiEdit />
+                                            Edit User
                                         </button>
                                     </td>
                                 </tr>

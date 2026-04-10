@@ -40,14 +40,15 @@ export default function Reports() {
                     <IoDocumentOutline /> Report details
                 </div>
                 <div className="card-body">
-                    <table className="table table-bordered table-radius">
+                    <table className="table border-secondary table-radius table-hover">
                         <thead className="text-center" style={{fontSize: "14px"}}>
                             <tr>
                                 <th>ID</th>
                                 <th>Test</th>
                                 <th>Date</th>
                                 <th>Time</th>
-                                <th>Status</th>  
+                                <th>Status</th> 
+                                <th>Action</th> 
                             </tr>
                         </thead>
                         <tbody className="text-center">
@@ -71,7 +72,7 @@ export default function Reports() {
                                             <Link
                                                 href={booking.reportUrl}
                                                 target="_blank"
-                                                className="btn btn-secondary d-flex justify-content-center align-items-center gap-2 py-1 px-3 "
+                                                className="btn btn-success d-flex justify-content-center align-items-center gap-2 py-1 px-2 rounded-pill"
                                             >
                                                 <FiDownload />
                                                 Download

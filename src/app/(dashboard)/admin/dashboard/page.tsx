@@ -5,6 +5,14 @@ import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 import { RiAccountCircle2Line } from "react-icons/ri";
+import { LuBadgeCheck } from "react-icons/lu";
+import { LuFileClock } from "react-icons/lu";
+import { VscSync } from "react-icons/vsc";
+import { LiaUserCircle } from "react-icons/lia";
+import { PiUserListLight } from "react-icons/pi";
+import { FiHome } from "react-icons/fi";
+import { LuLogOut } from "react-icons/lu";
+
 import Link from "next/link";
 
 export default function AdminDashboard() {
@@ -57,31 +65,25 @@ export default function AdminDashboard() {
                 <h2>Dashboard</h2>
                 <div className="d-flex justify-content-center align-items-center gap-2">
                     <Link
-                    href="/"
-                        className="px-2 py-1 d-flex justify-content-center align-items-center gap-2"
-                        style={{
-                            border: "1px solid #d6cece",
-                            borderRadius: 20,
-                        }}
+                        href="/"
+                        className="px-3 py-1 d-flex justify-content-center align-items-center gap-2 border border-success rounded-pill text-muted"
                     >
-                       Home
+                        <FiHome />
+                        Home
                     </Link>
                     <div
-                        className="px-2 py-1 d-flex justify-content-center align-items-center gap-2"
-                        style={{
-                            border: "1px solid #d6cece",
-                            borderRadius: 20,
-                        }}
+                        className="px-3 py-1 d-flex justify-content-center align-items-center gap-2 border border-primary rounded-pill text-muted"
                     >
-                        <RiAccountCircle2Line className="fs-2" />
-                        <div className="vr"></div> {name}
+                        <PiUserListLight />
+                        <div className="vr bg-primary"></div> {name}
                     </div>
                     <button
                         onClick={() => signOut({ callbackUrl: "/login" })}
-                        className="btn btn-danger py-2 px-4"
+                        className="btn btn-danger py-1 px-3 d-flex align-items-center gap-2"
                         style={{ borderRadius: 20 }}
                     >
                         Logout
+                        <LuLogOut />
                     </button>
                 </div>
             </div>
@@ -89,40 +91,59 @@ export default function AdminDashboard() {
             <div className="mx-4 my-8">
                 <div className="row">
                     <div className="col-md-4 mb-3">
-                        <div className="card border-0 shadow-sm h-200 border-start border-4 border-admin-green">
-                            <div className="card-body">
-                                <small className="text-muted">
-                                    Completed tests
-                                </small>
-                                <h3 className="fw-bold text-admin-green mb-0">
-                                    {result?.completedCount}
-                                </h3>
+                        <div
+                            className="card border-0 shadow-sm  border-admin-green"
+                            style={{ backgroundColor: "#10B981" }}
+                        >
+                            <div className="card-body d-flex justify-content-between">
+                                <div>
+                                    <h3 className="fw-bold text-white mb-0 fs-1">
+                                        {result?.completedCount}
+                                    </h3>
+                                    <small className="text-white fs-5">
+                                        Completed 
+                                    </small>
+                                </div>
+                                <LuBadgeCheck size={70} color="white" />
                             </div>
                         </div>
                     </div>
 
                     <div className="col-md-4 mb-3">
-                        <div className="card border-0 shadow-sm h-100">
-                            <div className="card-body">
-                                <small className="text-muted">
-                                    Pending Tests
-                                </small>
-                                <h3 className="fw-bold text-warning mb-0">
-                                    {result?.pendingCount}
-                                </h3>
+                        <div
+                            className="card border-0 shadow-sm h-100"
+                            style={{ backgroundColor: "#F59E0B" }}
+                        >
+                            <div className="card-body d-flex justify-content-between">
+                                <div>
+                                    <h3 className="fw-bold text-white mb-0 fs-1 ">
+                                        {result?.pendingCount}
+                                    </h3>
+                                    <small className="text-white fs-5">
+                                        Pending
+                                    </small>
+                                </div>
+
+                                <LuFileClock size={70} color="white" />
                             </div>
                         </div>
                     </div>
 
                     <div className="col-md-4 mb-3">
-                        <div className="card border-0 shadow-sm h-100">
-                            <div className="card-body">
-                                <small className="text-muted">
-                                    Ongoing Tests
-                                </small>
-                                <h3 className="fw-bold text-info mb-0">
-                                    {result?.ongoingCount}
-                                </h3>
+                        <div
+                            className="card border-0 shadow-sm h-100"
+                            style={{ backgroundColor: "#3B82F6" }}
+                        >
+                            <div className="card-body d-flex justify-content-between">
+                                <div>
+                                    <h3 className="fw-bold text-white mb-0 fs-1">
+                                        {result?.ongoingCount}
+                                    </h3>
+                                    <small className="text-white fs-5">
+                                        Ongoing
+                                    </small>
+                                </div>
+                                <VscSync size={70} color="white"/>
                             </div>
                         </div>
                     </div>
@@ -130,7 +151,7 @@ export default function AdminDashboard() {
             </div>
 
             <div className="mx-4 my-4">
-                <div className="card" style={{ backgroundColor: "#fafafa" }}>
+                <div className="card" style={{ backgroundColor: "#ffffff" }}>
                     <div className="card-body px-4">
                         <h5 className="card-title">Progress</h5>
                         <div
